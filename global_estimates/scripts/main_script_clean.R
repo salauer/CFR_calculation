@@ -71,11 +71,8 @@ reportDataFinal <- allDat %>%
     dplyr::mutate(underreporting_estimate = ifelse(underreporting_estimate <= 1,
                                                    underreporting_estimate, 1) %>%
                       signif(2),
-                  upper = ifelse(upper <= 1, upper, 1),
+                  upper = ifelse(upper <= 1, upper, 1) %>% signif(2),
                   lower = signif(lower, 2),
-                  upper = signif(upper, 2),
-                  country = country %>% stringr::str_replace_all("_", " "),
-                  underreporting_estimate_clean = paste0(underreporting_estimate*100,
-                                                         "% (",lower*100,"% - ",upper*100,"%)"))
+                  country = country %>% stringr::str_replace_all("_", " "))
 
 # saveRDS(reportDataFinal, "data/all_together_clean.rds")
